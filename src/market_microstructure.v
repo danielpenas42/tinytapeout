@@ -29,22 +29,23 @@ module market_microstructure (
 );
 
   // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out[0:4]  = 0; 
+  assign uo_out  = 0;
   assign uio_out = 0;
-  assign uio_oe  = 3;
+  assign uio_oe  = 8'b00000000;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, 1'b0};
+  wire _unused = &{ena, ui_in};
 
- 
+  // Currently we have unused miso. Could use if have extra gates and time. 
+  // assign uio_out[2] = miso;
+
   wire cs   = uio_in[0];
   wire mosi = uio_in[1];
-  wire miso = uio_out[2];
   wire sclk = uio_in[3];
   wire rst  = ~rst_n; // High reset
 
   wire       spi2m_val; // note for variable can only be reg if assigned in the module
-  reg        spi2m_rdy;
+  wire       spi2m_rdy = 1'b1;
   wire [7:0] spi2m_data;
 
   spiModule spi(
