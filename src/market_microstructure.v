@@ -16,6 +16,8 @@
   *  liquidity depth, and breakout indicators using pixel-level combinational
   
 */
+`include "spi/spiModule.v"
+
 `default_nettype none
 module market_microstructure (
     input  wire [7:0] ui_in,    // Dedicated inputs
@@ -48,16 +50,16 @@ module market_microstructure (
   wire       spi2m_rdy = 1'b1;
   wire [7:0] spi2m_data;
 
-  spiModule spi(
-    .clk(clk),
-    .rst(rst),
-    .cs(cs),
-    .mosi(mosi),
-    .miso(/*unused*/),
-    .sclk(sclk),
+  spiModule spi (
+    .clk     (clk),
+    .rst     (rst),
+    .cs      (cs),
+    .mosi    (mosi),
+    .miso    (/*unused*/),
+    .sclk    (sclk),
     .data_out(spi2m_data),
-    .val(spi2m_val),
-    .rdy(spi2m_rdy)
+    .val     (spi2m_val),
+    .rdy     (spi2m_rdy)
   );
 
 
