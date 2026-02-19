@@ -1,0 +1,7 @@
+read_verilog -I/home/dp665/tinytapeout/tinytapeout/src /home/dp665/tinytapeout/tinytapeout/src/market_microstructure.v
+hierarchy -check -top market_microstructure
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+dfflibmap -liberty /home/dp665/tinytapeout/tinytapeout/test/utils/sg13g2_stdcell_typ_1p20V_25C.lib
+abc -liberty /home/dp665/tinytapeout/tinytapeout/test/utils/sg13g2_stdcell_typ_1p20V_25C.lib
+stat -liberty /home/dp665/tinytapeout/tinytapeout/test/utils/sg13g2_stdcell_typ_1p20V_25C.lib
