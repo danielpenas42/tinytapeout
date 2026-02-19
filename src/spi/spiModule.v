@@ -14,7 +14,7 @@ module spiModule (
 
 reg [7:0] shift_reg;
 reg [2:0] counter;
-reg       s1, s2, prev, cs2;
+reg       s1, s2, prev, cs1, cs2;
 reg       clk_rise;
 reg [7:0] data_send;
 
@@ -73,9 +73,9 @@ always @(posedge clk) begin
         data_send <= 8'd0;
     end
     else begin
-        if (~val & (counter == 3'd7) & clk_cycle) begin // if i do this of clk cycle i am assuming there is another one coming after which might not be the case not fully sure if that is righ i think the clk_rise is wrong
+        if (~val & (counter == 3'd7) & clk_rise) begin 
             val <= 1'b1;
-            data_send <= {shif_reg[6:0], mosi};
+            data_send <= {shift_reg[6:0], mosi};
         end
         if (val & rdy) begin
             val <= 1'b0;
